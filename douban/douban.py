@@ -90,5 +90,5 @@ def main():
     plt.imshow(wordcloud)
     # plt.savefig("result.jpg")
 
-
-main()
+if __name__ == '__main__':
+    main()
