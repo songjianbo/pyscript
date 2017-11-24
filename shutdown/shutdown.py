@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Nov 17 10:01:20 2017
-
-@author: song
 """
 import sys
 import os
@@ -50,7 +48,7 @@ class Ui_shut(object):
 
     def retranslateUi(self, shut):
         _translate = QtCore.QCoreApplication.translate
-        shut.setWindowTitle(_translate("shut", "Auto Shutdown by song"))
+        shut.setWindowTitle(_translate("shut", "Auto Shutdown"))
         self.label.setText(_translate("shut", "At："))
         self.label_2.setText(_translate("shut", "H"))
         self.label_3.setText(_translate("shut", "M"))
