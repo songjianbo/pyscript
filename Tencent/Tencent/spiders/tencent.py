@@ -9,8 +9,6 @@ class TencentSpider(scrapy.Spider):
     start_urls = ['http://hr.tencent.com/position.php?&start=0']
 
     def parse(self, response):
-        if len(response.xpath("//a[@id='next' and @class='noactive']")) == 1:
-            return
         node_list = response.xpath("//tr[@class ='even'] | // tr[@class ='odd']")
         for node in node_list:
             item = TencentItem()
@@ -25,5 +23,6 @@ class TencentSpider(scrapy.Spider):
             item['publishTime'] = node.xpath("./td[5]/text()").extract()[0]
             yield item
 
-        url = response.xpath("//a[@id='next']/@href").extract()[0]
-        yield scrapy.Request("'http://hr.tencent.com/"+url)
+        if not len(response.xpath("//a[@id='next' and @class='noactive']")):
+            url = response.xpath("//a[@id='next']/@href").extract()[0]
+            yield scrapy.Request("http://hr.tencent.com/"+url, callback=self.parse)
