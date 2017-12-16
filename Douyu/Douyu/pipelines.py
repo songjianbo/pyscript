@@ -8,7 +8,7 @@
 import scrapy
 from scrapy.pipelines.images import ImagesPipeline
 import os
-from settings import IMAGES_STORE as images_store
+from settings import IMAGES_STORE
 
 
 class DouyuPipeline(ImagesPipeline):
@@ -18,8 +18,8 @@ class DouyuPipeline(ImagesPipeline):
 
     def item_completed(self, results, item, info):
         image_path = [x['path'] for ok, x in results if ok]
-        old_path = os.path.join(images_store, image_path[0])
-        new_path = os.path.join(images_store, item['nickname'] + ".jpg")
+        old_path = os.path.join(IMAGES_STORE, image_path[0])
+        new_path = os.path.join(IMAGES_STORE, item['nickname'] + ".jpg")
         if os.path.exists(old_path):
             os.rename(old_path, new_path)
         return item
